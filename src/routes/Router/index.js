@@ -1,8 +1,8 @@
 const emitter = require('../../utils/eventEmitter');
-const postPerson = require('../../controllers/postPerson');
-const getPerson = require('../../controllers/getPerson');
-const delPerson = require('../../controllers/delPerson');
-const putPerson = require('../../controllers/putPerson');
+const postUser = require('../../controllers/postUser');
+const getUser = require('../../controllers/getUser');
+const delUser = require('../../controllers/delUser');
+const putUser = require('../../controllers/putUser');
 
 class Router {
   constructor() {
@@ -42,20 +42,20 @@ class Router {
 
 const router = new Router();
 
-router.post('person', async (req, res) => {
-  await postPerson(req, res);
+router.post('users', async (req, res) => {
+  await postUser(req, res);
 });
 
-router.get('person', async (req, res) => {
-  await getPerson(req, res);
+router.get('users', async (req, res) => {
+  await getUser(req, res);
 });
 
-router.put('person', async (req, res) => {
-  await putPerson(req, res);
+router.put('users', async (req, res) => {
+  await putUser(req, res);
 });
 
-router.delete('person', async (req, res) => {
-  await delPerson(req, res);
+router.delete('users', async (req, res) => {
+  await delUser(req, res);
 });
 
 module.exports = router;

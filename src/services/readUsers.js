@@ -1,6 +1,6 @@
 const { database } = require("../repository/database");
 
-const readPersons = () => {
+const readUsers = () => {
   try {
     return database;
   } catch (error) {
@@ -8,4 +8,4 @@ const readPersons = () => {
   }
 };
 
-module.exports = readPersons;
+module.exports = readUsers;

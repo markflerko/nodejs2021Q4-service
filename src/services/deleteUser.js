@@ -1,6 +1,6 @@
 const { database } = require("../repository/database");
 
-const deletePerson = (id) => {
+const deleteUser = (id) => {
   try {
     return delete database[id];
   } catch (error) {
@@ -8,4 +8,4 @@ const deletePerson = (id) => {
   }
 };
 
-module.exports = deletePerson;
+module.exports = deleteUser;
