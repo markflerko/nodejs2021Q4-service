@@ -1,6 +1,6 @@
 const responseBuilder = require('./utils/responseBuilder');
 const emitter = require('./utils/eventEmitter');
-const router = require('./routes/Router/index');
+const router = require('./routes/users');
 
 module.exports = async (req, res) => {
   try {
