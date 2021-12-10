@@ -3,10 +3,10 @@ const { database } = require('../../repository/database');
 const { User } = require('../../models/User');
 
 const createUser = ({ data }) => {
-  //
   const id = uuidv4();
-  database[id] = new User({ ...data, id });
-  return database[id];
+  const user = new User({ ...data, id });
+  database.push(user);
+  return user;
 };
 
 module.exports = createUser;

@@ -1,14 +1,11 @@
 const { database } = require('../../repository/database');
 
 const updatePerson = ({ id, body }) => {
-  database[id] = {
-    id: database[id].id,
-    name: body.name ? body.name : database[id].name,
-    login: body.login ? body.login : database[id].login,
-    password: body.password ? body.password : database[id].password,
-  };
-  console.log(database[id]);
-  return database[id];
+  const user = database.find((item) => item.id === id);
+  user.name = body.name ? body.name : user.name;
+  user.login = body.login ? body.login : user.login;
+  user.password = body.password ? body.password : user.password;
+  return user;
 };
 
 module.exports = updatePerson;

@@ -1,3 +1,3 @@
-const database = {};
+const database = [];
 
 exports.database = database;

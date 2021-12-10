@@ -32,7 +32,7 @@ router.post('users', async (req, res) => {
 
 router.get('users', async (req, res) => {
   const id = getIdFromReq(req);
-  const haveId = Object.prototype.hasOwnProperty.call(database, id);
+  const haveId = database.some((item) => item.id === id);
 
   if (!id) {
     const users = readUsers();
@@ -65,7 +65,7 @@ router.put('users', async (req, res) => {
 
   await bodyParser(req);
   const data = req.body;
-  const haveId = Object.prototype.hasOwnProperty.call(database, id);
+  const haveId = database.some((item) => item.id === id);
 
   if (!isUuid(id)) {
     responseBuilder({
@@ -87,7 +87,7 @@ router.put('users', async (req, res) => {
 
 router.delete('users', async (req, res) => {
   const id = getIdFromReq(req);
-  const haveId = Object.prototype.hasOwnProperty.call(database, id);
+  const haveId = database.some((item) => item.id === id);
 
   if (!isUuid(id)) {
     responseBuilder({
