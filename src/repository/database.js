@@ -1,3 +1,3 @@
-let database = {};
+const database = {};
 
 exports.database = database;

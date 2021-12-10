@@ -5,7 +5,7 @@ class Router {
     this.endpoints = {};
   }
 
-  request(method = 'GET', path, handler) {
+  request({ method = 'GET', path, handler }) {
     if (!this.endpoints[path]) {
       this.endpoints[path] = {};
     }
@@ -20,19 +20,19 @@ class Router {
   }
 
   get(path, handler) {
-    this.request('GET', path, handler);
+    this.request({ method: 'GET', path, handler });
   }
 
   post(path, handler) {
-    this.request('POST', path, handler);
+    this.request({ method: 'POST', path, handler });
   }
 
   put(path, handler) {
-    this.request('PUT', path, handler);
+    this.request({ method: 'PUT', path, handler });
   }
 
   delete(path, handler) {
-    this.request('DELETE', path, handler);
+    this.request({ method: 'DELETE', path, handler });
   }
 }
 

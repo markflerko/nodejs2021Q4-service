@@ -1,11 +1,5 @@
-const { database } = require("../../repository/database");
+const { database } = require('../../repository/database');
 
-const readUsers = () => {
-  try {
-    return database;
-  } catch (error) {
-    throw error;
-  }
-};
+const readUsers = () => database;
 
 module.exports = readUsers;

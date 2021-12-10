@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-catch */
 const Router = require('./Router/index');
 const deleteUser = require('../services/users/deleteUser');
 const { database } = require('../repository/database');

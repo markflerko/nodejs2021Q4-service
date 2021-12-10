@@ -1,11 +1,5 @@
 const { database } = require('../../repository/database');
 
-const deleteUser = (id) => {
-  try {
-    return delete database[id];
-  } catch (error) {
-    throw error;
-  }
-};
+const deleteUser = (id) => delete database[id];
 
 module.exports = deleteUser;

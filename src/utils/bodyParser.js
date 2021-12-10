@@ -1,25 +1,20 @@
-const bodyParser = (req) => {
-  try {
-    return new Promise((res, rej) => {
-      let chunks = "";
+const bodyParser = (req) =>
+  new Promise((res, rej) => {
+    let chunks = '';
 
-      req.on("error", (err) => {
-        console.error("error happened while body parsing", err);
-        rej();
-      });
-
-      req.on("data", (chunk) => {
-        chunks += chunk;
-      });
-
-      req.on("end", () => {
-        req.body = JSON.parse(chunks);
-        res();
-      });
+    req.on('error', (err) => {
+      console.error('error happened while body parsing', err);
+      rej();
     });
-  } catch (error) {
-    throw error;
-  }
-};
+
+    req.on('data', (chunk) => {
+      chunks += chunk;
+    });
+
+    req.on('end', () => {
+      req.body = JSON.parse(chunks);
+      res();
+    });
+  });
 
 module.exports = bodyParser;

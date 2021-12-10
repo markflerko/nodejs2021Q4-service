@@ -1,12 +1,8 @@
 const { database } = require('../../repository/database');
 
 const updatePerson = ({ id, body }) => {
-  try {
-    database[id] = { ...database[id], ...body };
-    return database[id];
-  } catch (error) {
-    throw error;
-  }
+  database[id] = { ...database[id], ...body };
+  return database[id];
 };
 
 module.exports = updatePerson;
