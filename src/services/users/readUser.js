@@ -1,4 +1,4 @@
-const { database } = require("../repository/database");
+const { database } = require("../../repository/database");
 
 const readUser = (id) => {
   try {

@@ -1,15 +1,15 @@
 /* eslint-disable no-useless-catch */
 const Router = require('./Router/index');
-const deleteUser = require('../services/deleteUser');
+const deleteUser = require('../services/users/deleteUser');
 const { database } = require('../repository/database');
 const isUuid = require('../utils/isUuid');
 const responseBuilder = require('../utils/responseBuilder');
 const getIdFromReq = require('../utils/getPathFromReq');
-const readUser = require('../services/readUser');
-const readUsers = require('../services/readUsers');
-const createUser = require('../services/createUser');
+const readUser = require('../services/users/readUser');
+const readUsers = require('../services/users/readUsers');
+const createUser = require('../services/users/createUser');
 const bodyParser = require('../utils/bodyParser');
-const updateUser = require('../services/updateUser');
+const updateUser = require('../services/users/updateUser');
 
 const router = new Router();
 
