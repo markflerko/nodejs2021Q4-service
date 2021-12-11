@@ -4,15 +4,70 @@ const isUuid = require('../utils/isUuid');
 const responseBuilder = require('../utils/responseBuilder');
 const getIdFromReq = require('../utils/getPathFromReq');
 const createTask = require('../services/tasks/createTask');
-const readBoards = require('../services/boards/readBoards');
-const readBoard = require('../services/boards/readBoard');
+const readTasks = require('../services/tasks/readTasks');
+const readTask = require('../services/tasks/readTask');
 const bodyParser = require('../utils/bodyParser');
 const updateBoard = require('../services/boards/updateBoard');
-const deleteBoard = require('../services/boards/deleteBoard');
+const deleteTask = require('../services/tasks/deleteTask');
 
 const router = new Router();
 
 const createSubRouter = (boardId) => {
+  router.delete(`boards/${boardId}/tasks`, async (req, res) => {
+    const id = getIdFromReq(req);
+    const haveId = tasksRepository.some((item) => item.id === id);
+
+    if (!isUuid(id)) {
+      responseBuilder({
+        res,
+        code: 400,
+        message: `Sorry but id: ${id} doesnt match uuid format \n`,
+      });
+    } else if (!haveId) {
+      responseBuilder({
+        res,
+        code: 404,
+        message: `Sorry but no task with ${id} exist \n`,
+      });
+    } else {
+      const isTaskDeleted = deleteTask(id);
+      if (isTaskDeleted) {
+        responseBuilder({ res, code: 204 });
+      }
+    }
+  });
+
+  router.get(`boards/${boardId}/tasks`, async (req, res) => {
+    const id = getIdFromReq(req);
+    const haveId = tasksRepository.some((item) => item.id === id);
+    console.log('id: ', id);
+
+    if (!id) {
+      const tasks = readTasks();
+      responseBuilder({ res, code: 200, body: tasks });
+    } else if (!isUuid(id)) {
+      responseBuilder({
+        res,
+        code: 400,
+        message: `Sorry but id: ${id} doesnt match uuid format \n`,
+      });
+    } else if (!haveId) {
+      responseBuilder({
+        res,
+        code: 404,
+        message: `Sorry but no task with ${id} exist \n`,
+      });
+    } else {
+      const task = readTask(id);
+
+      responseBuilder({
+        res,
+        code: 200,
+        body: task,
+      });
+    }
+  });
+
   router.post(`boards/${boardId}/tasks`, async (req, res) => {
     await bodyParser(req);
     const data = req.body;

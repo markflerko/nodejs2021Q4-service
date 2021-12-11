@@ -4,12 +4,15 @@ const emitter = require('./utils/eventEmitter');
 const usersRouter = require('./routes/users');
 // eslint-disable-next-line no-unused-vars
 const boardsRouter = require('./routes/boards');
+// // eslint-disable-next-line no-unused-vars
+const { tasksRouter } = require('./routes/tasks');
 
 module.exports = async (req, res) => {
   try {
     const { method, url } = req;
     const pathFull = url.split('/').slice(1);
     const [path, pathId, pathIdPath] = pathFull;
+    console.log(path);
 
     if (pathFull.length >= 3 && pathIdPath !== 'tasks') {
       responseBuilder({
