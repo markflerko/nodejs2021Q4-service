@@ -5,7 +5,7 @@ const responseBuilder = require('../utils/responseBuilder');
 const getIdFromReq = require('../utils/getPathFromReq');
 const createBoard = require('../services/boards/createBoard');
 const readBoards = require('../services/boards/readBoards');
-const readUser = require('../services/users/readUser');
+const readBoard = require('../services/boards/readBoard');
 const bodyParser = require('../utils/bodyParser');
 const updateUser = require('../services/users/updateUser');
 const deleteUser = require('../services/users/deleteUser');
@@ -46,15 +46,15 @@ router.get('boards', async (req, res) => {
     responseBuilder({
       res,
       code: 404,
-      message: `Sorry but no user with ${id} exist \n`,
+      message: `Sorry but no board with ${id} exist \n`,
     });
   } else {
-    const user = readUser(id);
+    const board = readBoard(id);
 
     responseBuilder({
       res,
       code: 200,
-      body: user,
+      body: board,
     });
   }
 });
