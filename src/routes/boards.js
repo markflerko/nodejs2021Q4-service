@@ -9,7 +9,7 @@ const readBoard = require('../services/boards/readBoard');
 const bodyParser = require('../utils/bodyParser');
 const updateBoard = require('../services/boards/updateBoard');
 const deleteBoard = require('../services/boards/deleteBoard');
-const createSubRouter = require('./tasks');
+const { createSubRouter } = require('./tasks');
 
 const router = new Router();
 

@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   try {
     const { method, url } = req;
     const pathFull = url.split('/').slice(1);
-    const [path, , pathIdPath] = pathFull;
+    const [path, pathId, pathIdPath] = pathFull;
 
     if (pathFull.length >= 3 && pathIdPath !== 'tasks') {
       responseBuilder({
@@ -18,8 +18,10 @@ module.exports = async (req, res) => {
         message: 'Sorry we have only one layer nest\n',
       });
     } else {
-      const emitted = emitter.emit(`[${path}]:[${method}]`, req, res);
-      console.log(`[${path}]:[${method}]`);
+      const route =
+        pathIdPath === 'tasks' ? `${path}/${pathId}/${pathIdPath}` : path;
+      const emitted = emitter.emit(`[${route}]:[${method}]`, req, res);
+      console.log(`[${route}]:[${method}]`);
       if (!emitted) {
         responseBuilder({
           res,

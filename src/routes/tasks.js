@@ -45,4 +45,5 @@ const createSubRouter = (boardId) => {
   });
 };
 
-module.exports = createSubRouter;
+exports.createSubRouter = createSubRouter;
+exports.tasksRouter = router;

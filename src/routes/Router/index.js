@@ -17,6 +17,7 @@ class Router {
     emitter.on(`[${path}]:[${method}]`, (req, res) => {
       handler(req, res);
     });
+    console.log(this.endpoints);
   }
 
   get(path, handler) {
