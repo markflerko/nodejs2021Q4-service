@@ -119,7 +119,7 @@ const createSubRouter = (boardId) => {
         message: `You didn't provide one of required fields, please check title: ${data.title} order: ${data.order} description: ${data.description} userId: ${data.userId} boardId: ${data.boardId} columnId: ${data.columnId}\n`,
       });
     } else {
-      const task = createTask({ data });
+      const task = createTask({ data, boardId });
       responseBuilder({ res, code: 201, body: task });
     }
   });
