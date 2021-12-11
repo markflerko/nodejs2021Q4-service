@@ -6,7 +6,11 @@ const createUser = ({ data }) => {
   const id = uuidv4();
   const user = new User({ ...data, id });
   usersRepository.push(user);
-  return user;
+  return {
+    id: user.id,
+    name: user.name,
+    login: user.login,
+  };
 };
 
 module.exports = createUser;

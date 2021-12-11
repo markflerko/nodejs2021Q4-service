@@ -1,18 +1,14 @@
 const responseBuilder = require('./utils/responseBuilder');
 const emitter = require('./utils/eventEmitter');
-// eslint-disable-next-line no-unused-vars
-const usersRouter = require('./routes/users');
-// eslint-disable-next-line no-unused-vars
-const boardsRouter = require('./routes/boards');
-// eslint-disable-next-line no-unused-vars
-const { tasksRouter } = require('./routes/tasks');
+require('./routes/users');
+require('./routes/boards');
+require('./routes/tasks');
 
 module.exports = async (req, res) => {
   try {
     const { method, url } = req;
     const pathFull = url.split('/').slice(1);
     const [path, pathId, pathIdPath] = pathFull;
-    console.log(path);
 
     if (pathFull.length >= 3 && pathIdPath !== 'tasks') {
       responseBuilder({
@@ -24,7 +20,6 @@ module.exports = async (req, res) => {
       const route =
         pathIdPath === 'tasks' ? `${path}/${pathId}/${pathIdPath}` : path;
       const emitted = emitter.emit(`[${route}]:[${method}]`, req, res);
-      console.log(`[${route}]:[${method}]`);
       if (!emitted) {
         responseBuilder({
           res,

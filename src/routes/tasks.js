@@ -65,7 +65,6 @@ const createSubRouter = (boardId) => {
   router.get(`boards/${boardId}/tasks`, async (req, res) => {
     const id = getIdFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
-    console.log('id: ', id);
 
     if (!id) {
       const tasks = readTasks();
@@ -96,6 +95,7 @@ const createSubRouter = (boardId) => {
   router.post(`boards/${boardId}/tasks`, async (req, res) => {
     await bodyParser(req);
     const data = req.body;
+
     const haveTitle = Object.prototype.hasOwnProperty.call(data, 'title');
     const haveOrder = Object.prototype.hasOwnProperty.call(data, 'order');
     const haveDescription = Object.prototype.hasOwnProperty.call(
@@ -104,14 +104,12 @@ const createSubRouter = (boardId) => {
     );
     const haveUserId = Object.prototype.hasOwnProperty.call(data, 'userId');
     const haveBoardId = Object.prototype.hasOwnProperty.call(data, 'boardId');
-    const haveColumnId = Object.prototype.hasOwnProperty.call(data, 'columnId');
     if (
       !haveTitle ||
       !haveOrder ||
       !haveDescription ||
       !haveUserId ||
-      !haveBoardId ||
-      !haveColumnId
+      !haveBoardId
     ) {
       responseBuilder({
         res,
