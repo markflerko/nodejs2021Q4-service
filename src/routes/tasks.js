@@ -7,12 +7,37 @@ const createTask = require('../services/tasks/createTask');
 const readTasks = require('../services/tasks/readTasks');
 const readTask = require('../services/tasks/readTask');
 const bodyParser = require('../utils/bodyParser');
-const updateBoard = require('../services/boards/updateBoard');
+const updateTask = require('../services/tasks/updateTask');
 const deleteTask = require('../services/tasks/deleteTask');
 
 const router = new Router();
 
 const createSubRouter = (boardId) => {
+  router.put(`boards/${boardId}/tasks`, async (req, res) => {
+    const id = getIdFromReq(req);
+
+    await bodyParser(req);
+    const data = req.body;
+    const haveId = tasksRepository.some((item) => item.id === id);
+
+    if (!isUuid(id)) {
+      responseBuilder({
+        res,
+        code: 400,
+        message: `Sorry but id: ${id} doesnt match uuid format \n`,
+      });
+    } else if (!haveId) {
+      responseBuilder({
+        res,
+        code: 404,
+        message: `Sorry but no task with ${id} exist \n`,
+      });
+    } else {
+      const updatedTask = updateTask({ id, body: data });
+      responseBuilder({ res, code: 200, body: updatedTask });
+    }
+  });
+
   router.delete(`boards/${boardId}/tasks`, async (req, res) => {
     const id = getIdFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
