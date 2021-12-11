@@ -1,3 +1,7 @@
-const database = [];
+const usersRepository = [];
 
-exports.database = database;
+const boardsRepository = [];
+
+exports.boardsRepository = boardsRepository;
+
+exports.usersRepository = usersRepository;

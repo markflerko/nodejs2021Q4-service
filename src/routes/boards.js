@@ -1,41 +1,40 @@
 const Router = require('./Router/index');
-const deleteUser = require('../services/users/deleteUser');
-const { usersRepository } = require('../repository/database');
+const { boardsRepository } = require('../repository/database');
 const isUuid = require('../utils/isUuid');
 const responseBuilder = require('../utils/responseBuilder');
 const getIdFromReq = require('../utils/getPathFromReq');
+const createBoard = require('../services/boards/createBoard');
+const readBoards = require('../services/boards/readBoards');
 const readUser = require('../services/users/readUser');
-const readUsers = require('../services/users/readUsers');
-const createUser = require('../services/users/createUser');
 const bodyParser = require('../utils/bodyParser');
 const updateUser = require('../services/users/updateUser');
+const deleteUser = require('../services/users/deleteUser');
 
 const router = new Router();
 
-router.post('users', async (req, res) => {
+router.post('boards', async (req, res) => {
   await bodyParser(req);
   const data = req.body;
-  const haveName = Object.prototype.hasOwnProperty.call(data, 'name');
-  const haveLogin = Object.prototype.hasOwnProperty.call(data, 'login');
-  const havePass = Object.prototype.hasOwnProperty.call(data, 'password');
-  if (!haveName || !haveLogin || !havePass) {
+  const haveTitle = Object.prototype.hasOwnProperty.call(data, 'title');
+  const haveColumns = Object.prototype.hasOwnProperty.call(data, 'columns');
+  if (!haveTitle || !haveColumns) {
     responseBuilder({
       res,
       code: 400,
-      message: `You didn't provide one of required fields, please check name: ${data.name} login: ${data.login} password: ${data.password}\n`,
+      message: `You didn't provide one of required fields, please check title: ${data.title} columns: ${data.columns}\n`,
     });
   } else {
-    const person = createUser({ data });
-    responseBuilder({ res, code: 201, body: person });
+    const board = createBoard({ data });
+    responseBuilder({ res, code: 201, body: board });
   }
 });
 
-router.get('users', async (req, res) => {
+router.get('boards', async (req, res) => {
   const id = getIdFromReq(req);
-  const haveId = usersRepository.some((item) => item.id === id);
+  const haveId = boardsRepository.some((item) => item.id === id);
 
   if (!id) {
-    const users = readUsers();
+    const users = readBoards();
     responseBuilder({ res, code: 200, body: users });
   } else if (!isUuid(id)) {
     responseBuilder({
@@ -65,7 +64,7 @@ router.put('users', async (req, res) => {
 
   await bodyParser(req);
   const data = req.body;
-  const haveId = usersRepository.some((item) => item.id === id);
+  const haveId = boardsRepository.some((item) => item.id === id);
 
   if (!isUuid(id)) {
     responseBuilder({
@@ -87,7 +86,7 @@ router.put('users', async (req, res) => {
 
 router.delete('users', async (req, res) => {
   const id = getIdFromReq(req);
-  const haveId = usersRepository.some((item) => item.id === id);
+  const haveId = boardsRepository.some((item) => item.id === id);
 
   if (!isUuid(id)) {
     responseBuilder({

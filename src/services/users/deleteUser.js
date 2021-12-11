@@ -1,9 +1,9 @@
-const { database } = require('../../repository/database');
+const { usersRepository } = require('../../repository/database');
 
 const deleteUser = (id) => {
-  const index = database.findIndex((item) => item.id === id);
-  database.copyWithin(index, index + 1).pop();
-  return database.findIndex((item) => item.id === id) === -1;
+  const index = usersRepository.findIndex((item) => item.id === id);
+  usersRepository.copyWithin(index, index + 1).pop();
+  return usersRepository.findIndex((item) => item.id === id) === -1;
 };
 
 module.exports = deleteUser;

@@ -1,5 +1,10 @@
-const { database } = require('../../repository/database');
+const { usersRepository } = require('../../repository/database');
 
-const readUsers = () => database;
+const readUsers = () =>
+  usersRepository.map((item) => ({
+    id: item.id,
+    name: item.name,
+    login: item.login,
+  }));
 
 module.exports = readUsers;

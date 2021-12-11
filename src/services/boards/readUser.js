@@ -1,7 +1,7 @@
-const { usersRepository } = require('../../repository/database');
+const { database } = require('../../repository/database');
 
 const readUser = (id) => {
-  const user = usersRepository.find((item) => item.id === id);
+  const user = database.find((item) => item.id === id);
   return {
     id: user.id,
     name: user.name,

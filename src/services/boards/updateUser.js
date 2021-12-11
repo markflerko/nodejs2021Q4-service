@@ -1,7 +1,7 @@
-const { usersRepository } = require('../../repository/database');
+const { database } = require('../../repository/database');
 
 const updatePerson = ({ id, body }) => {
-  const user = usersRepository.find((item) => item.id === id);
+  const user = database.find((item) => item.id === id);
   user.name = body.name ? body.name : user.name;
   user.login = body.login ? body.login : user.login;
   user.password = body.password ? body.password : user.password;

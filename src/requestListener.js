@@ -1,7 +1,9 @@
 const responseBuilder = require('./utils/responseBuilder');
 const emitter = require('./utils/eventEmitter');
 // eslint-disable-next-line no-unused-vars
-const router = require('./routes/users');
+const usersRouter = require('./routes/users');
+// eslint-disable-next-line no-unused-vars
+const boardsRouter = require('./routes/boards');
 
 module.exports = async (req, res) => {
   try {
