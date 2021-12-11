@@ -7,7 +7,7 @@ const createBoard = require('../services/boards/createBoard');
 const readBoards = require('../services/boards/readBoards');
 const readBoard = require('../services/boards/readBoard');
 const bodyParser = require('../utils/bodyParser');
-const updateUser = require('../services/users/updateUser');
+const updateBoard = require('../services/boards/updateBoard');
 const deleteUser = require('../services/users/deleteUser');
 
 const router = new Router();
@@ -59,7 +59,7 @@ router.get('boards', async (req, res) => {
   }
 });
 
-router.put('users', async (req, res) => {
+router.put('boards', async (req, res) => {
   const id = getIdFromReq(req);
 
   await bodyParser(req);
@@ -76,11 +76,11 @@ router.put('users', async (req, res) => {
     responseBuilder({
       res,
       code: 404,
-      message: `Sorry but no user with ${id} exist \n`,
+      message: `Sorry but no board with ${id} exist \n`,
     });
   } else {
-    const updatedPerson = updateUser({ id, body: data });
-    responseBuilder({ res, code: 200, body: updatedPerson });
+    const updatedBoard = updateBoard({ id, body: data });
+    responseBuilder({ res, code: 200, body: updatedBoard });
   }
 });
 
