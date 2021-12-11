@@ -8,7 +8,7 @@ const readBoards = require('../services/boards/readBoards');
 const readBoard = require('../services/boards/readBoard');
 const bodyParser = require('../utils/bodyParser');
 const updateBoard = require('../services/boards/updateBoard');
-const deleteUser = require('../services/users/deleteUser');
+const deleteBoard = require('../services/boards/deleteBoard');
 
 const router = new Router();
 
@@ -84,7 +84,7 @@ router.put('boards', async (req, res) => {
   }
 });
 
-router.delete('users', async (req, res) => {
+router.delete('boards', async (req, res) => {
   const id = getIdFromReq(req);
   const haveId = boardsRepository.some((item) => item.id === id);
 
@@ -98,11 +98,11 @@ router.delete('users', async (req, res) => {
     responseBuilder({
       res,
       code: 404,
-      message: `Sorry but no user with ${id} exist \n`,
+      message: `Sorry but no board with ${id} exist \n`,
     });
   } else {
-    const isUserDeleted = deleteUser(id);
-    if (isUserDeleted) {
+    const isBoardDeleted = deleteBoard(id);
+    if (isBoardDeleted) {
       responseBuilder({ res, code: 204 });
     }
   }
