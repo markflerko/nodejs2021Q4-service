@@ -4,7 +4,11 @@ const { Board } = require('../../models/Board');
 
 const createUser = ({ data }) => {
   const id = uuidv4();
-  const board = new Board({ ...data, id });
+  const columns = data.columns.map((item) => ({
+    id: uuidv4(),
+    ...item,
+  }));
+  const board = new Board({ ...data, id, columns });
   boardsRepository.push(board);
   return board;
 };

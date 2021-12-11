@@ -1,7 +1,7 @@
 const usersRepository = [];
-
 const boardsRepository = [];
-
-exports.boardsRepository = boardsRepository;
+const tasksRepository = [];
 
 exports.usersRepository = usersRepository;
+exports.boardsRepository = boardsRepository;
+exports.tasksRepository = tasksRepository;

@@ -9,9 +9,9 @@ module.exports = async (req, res) => {
   try {
     const { method, url } = req;
     const pathFull = url.split('/').slice(1);
-    const [path] = pathFull;
+    const [path, , pathIdPath] = pathFull;
 
-    if (pathFull.length >= 3) {
+    if (pathFull.length >= 3 && pathIdPath !== 'tasks') {
       responseBuilder({
         res,
         code: 404,

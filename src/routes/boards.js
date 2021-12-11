@@ -12,6 +12,39 @@ const deleteBoard = require('../services/boards/deleteBoard');
 
 const router = new Router();
 
+const createSubRouter = ({ boardId }) => {
+  router.post(`boards/${boardId}/tasks`, async (req, res) => {
+    await bodyParser(req);
+    const data = req.body;
+    const haveTitle = Object.prototype.hasOwnProperty.call(data, 'title');
+    const haveOrder = Object.prototype.hasOwnProperty.call(data, 'order');
+    const haveDescription = Object.prototype.hasOwnProperty.call(
+      data,
+      'description'
+    );
+    const haveUserId = Object.prototype.hasOwnProperty.call(data, 'userId');
+    const haveBoardId = Object.prototype.hasOwnProperty.call(data, 'boardId');
+    const haveColumnId = Object.prototype.hasOwnProperty.call(data, 'columnId');
+    if (
+      !haveTitle ||
+      !haveOrder ||
+      !haveDescription ||
+      !haveUserId ||
+      !haveBoardId ||
+      !haveColumnId
+    ) {
+      responseBuilder({
+        res,
+        code: 400,
+        message: `You didn't provide one of required fields, please check title: ${data.title} order: ${data.order} description: ${data.description} userId: ${data.userId} boardId: ${data.boardId} columnId: ${data.columnId}\n`,
+      });
+    } else {
+      const board = createBoard({ data });
+      responseBuilder({ res, code: 201, body: board });
+    }
+  });
+};
+
 router.post('boards', async (req, res) => {
   await bodyParser(req);
   const data = req.body;
@@ -25,6 +58,7 @@ router.post('boards', async (req, res) => {
     });
   } else {
     const board = createBoard({ data });
+    createSubRouter(board.id);
     responseBuilder({ res, code: 201, body: board });
   }
 });
