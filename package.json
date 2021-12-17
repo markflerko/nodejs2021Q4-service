@@ -67,5 +67,10 @@
     "nodemon": "2.0.15",
     "prettier": "2.4.1",
     "supertest": "6.1.6"
+  },
+  "nodemonConfig": {
+    "events": {
+      "start": "cls || clear"
+    }
   }
 }
