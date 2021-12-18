@@ -1,5 +1,5 @@
-const http = require('http');
-const requestListener = require('./requestListener');
+import http from 'http';
+import requestListener from './requestListener';
 
 const app = http.createServer(requestListener);
 
