@@ -1,13 +1,13 @@
-const bodyParser = (req) =>
-  new Promise((res, rej) => {
+const bodyParser = (req: any) =>
+  new Promise<void>((res, rej) => {
     let chunks = '';
 
-    req.on('error', (err) => {
+    req.on('error', (err: Error) => {
       console.error('error happened while body parsing', err);
       rej();
     });
 
-    req.on('data', (chunk) => {
+    req.on('data', (chunk: string) => {
       chunks += chunk;
     });
 

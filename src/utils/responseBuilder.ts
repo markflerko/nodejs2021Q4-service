@@ -1,4 +1,14 @@
-const responseBuilder = ({ res, code, body = '', message = '' }) => {
+const responseBuilder = ({
+  res,
+  code,
+  body = '',
+  message = '',
+}: {
+  res: any;
+  code: number;
+  body: any;
+  message: string;
+}) => {
   if (body) {
     res.writeHead(code, { 'Content-Type': 'application/json' });
     res.write(JSON.stringify(body));
