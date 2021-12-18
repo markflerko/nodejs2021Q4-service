@@ -3,8 +3,8 @@ import { Router } from './Router';
 import { boardsRepository } from '../repository/database';
 import { isUuid } from '../utils/isUuid';
 import { responseBuilder } from '../utils/responseBuilder';
+import { getPathFromReq } from '../utils/getPathFromReq';
 
-const getIdFromReq = require('../utils/getPathFromReq');
 const createBoard = require('../services/boards/createBoard');
 const readBoards = require('../services/boards/readBoards');
 const readBoard = require('../services/boards/readBoard');
@@ -34,7 +34,7 @@ router.post('boards', async (req: any, res: any) => {
 });
 
 router.get('boards', async (req: any, res: any) => {
-  const id = getIdFromReq(req);
+  const id = getPathFromReq(req);
   const haveId = boardsRepository.some((item) => item.id === id);
 
   if (!id) {
@@ -64,7 +64,7 @@ router.get('boards', async (req: any, res: any) => {
 });
 
 router.put('boards', async (req: any, res: any) => {
-  const id = getIdFromReq(req);
+  const id = getPathFromReq(req);
 
   await bodyParser(req);
   const data = req.body;
@@ -89,7 +89,7 @@ router.put('boards', async (req: any, res: any) => {
 });
 
 router.delete('boards', async (req: any, res: any) => {
-  const id = getIdFromReq(req);
+  const id = getPathFromReq(req);
   const haveId = boardsRepository.some((item) => item.id === id);
 
   if (!isUuid(id)) {

@@ -1,10 +1,12 @@
+import { ServerResponse } from 'http';
+
 export const responseBuilder = ({
   res,
   code,
   body = '',
   message = '',
 }: {
-  res: any;
+  res: ServerResponse;
   code: number;
   body?: any;
   message?: string;

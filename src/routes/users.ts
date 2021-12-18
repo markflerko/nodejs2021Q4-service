@@ -3,9 +3,9 @@ import { usersRepository } from '../repository/database';
 import { isUuid } from '../utils/isUuid';
 import { Router } from './Router';
 import { responseBuilder } from '../utils/responseBuilder';
+import { getPathFromReq } from '../utils/getPathFromReq';
 
 const deleteUser = require('../services/users/deleteUser');
-const getIdFromReq = require('../utils/getPathFromReq');
 const readUser = require('../services/users/readUser');
 const readUsers = require('../services/users/readUsers');
 const createUser = require('../services/users/createUser');
@@ -33,7 +33,7 @@ router.post('users', async (req: any, res: any) => {
 });
 
 router.get('users', async (req: any, res: any) => {
-  const id = getIdFromReq(req);
+  const id = getPathFromReq(req);
   const haveId = usersRepository.some((item) => item.id === id);
 
   if (!id) {
@@ -63,7 +63,7 @@ router.get('users', async (req: any, res: any) => {
 });
 
 router.put('users', async (req: any, res: any) => {
-  const id = getIdFromReq(req);
+  const id = getPathFromReq(req);
 
   await bodyParser(req);
   const data = req.body;
@@ -88,7 +88,7 @@ router.put('users', async (req: any, res: any) => {
 });
 
 router.delete('users', async (req: any, res: any) => {
-  const id = getIdFromReq(req);
+  const id = getPathFromReq(req);
   const haveId = usersRepository.some((item) => item.id === id);
 
   if (!isUuid(id)) {

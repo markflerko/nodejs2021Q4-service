@@ -3,8 +3,8 @@ import { Router } from './Router';
 import { tasksRepository } from '../repository/database';
 import { isUuid } from '../utils/isUuid';
 import { responseBuilder } from '../utils/responseBuilder';
+import { getPathFromReq } from '../utils/getPathFromReq';
 
-const getIdFromReq = require('../utils/getPathFromReq');
 const createTask = require('../services/tasks/createTask');
 const readTasks = require('../services/tasks/readTasks');
 const readTask = require('../services/tasks/readTask');
@@ -16,7 +16,7 @@ const router = new Router();
 
 const createSubRouter = (boardId: string) => {
   router.put(`boards/${boardId}/tasks`, async (req: any, res: any) => {
-    const id = getIdFromReq(req);
+    const id = getPathFromReq(req);
 
     await bodyParser(req);
     const data = req.body;
@@ -41,7 +41,7 @@ const createSubRouter = (boardId: string) => {
   });
 
   router.delete(`boards/${boardId}/tasks`, async (req: any, res: any) => {
-    const id = getIdFromReq(req);
+    const id = getPathFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
 
     if (!isUuid(id)) {
@@ -65,7 +65,7 @@ const createSubRouter = (boardId: string) => {
   });
 
   router.get(`boards/${boardId}/tasks`, async (req: any, res: any) => {
-    const id = getIdFromReq(req);
+    const id = getPathFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
 
     if (!id) {
