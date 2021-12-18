@@ -1,7 +1,9 @@
-const Router = require('./Router/index');
-const { boardsRepository } = require('../repository/database');
-const isUuid = require('../utils/isUuid');
-const responseBuilder = require('../utils/responseBuilder');
+/* eslint-disable import/no-import-module-exports */
+import { Router } from './Router';
+import { boardsRepository } from '../repository/database';
+import { isUuid } from '../utils/isUuid';
+import { responseBuilder } from '../utils/responseBuilder';
+
 const getIdFromReq = require('../utils/getPathFromReq');
 const createBoard = require('../services/boards/createBoard');
 const readBoards = require('../services/boards/readBoards');
@@ -13,7 +15,7 @@ const { createSubRouter } = require('./tasks');
 
 const router = new Router();
 
-router.post('boards', async (req, res) => {
+router.post('boards', async (req: any, res: any) => {
   await bodyParser(req);
   const data = req.body;
   const haveTitle = Object.prototype.hasOwnProperty.call(data, 'title');
@@ -31,7 +33,7 @@ router.post('boards', async (req, res) => {
   }
 });
 
-router.get('boards', async (req, res) => {
+router.get('boards', async (req: any, res: any) => {
   const id = getIdFromReq(req);
   const haveId = boardsRepository.some((item) => item.id === id);
 
@@ -61,7 +63,7 @@ router.get('boards', async (req, res) => {
   }
 });
 
-router.put('boards', async (req, res) => {
+router.put('boards', async (req: any, res: any) => {
   const id = getIdFromReq(req);
 
   await bodyParser(req);
@@ -86,7 +88,7 @@ router.put('boards', async (req, res) => {
   }
 });
 
-router.delete('boards', async (req, res) => {
+router.delete('boards', async (req: any, res: any) => {
   const id = getIdFromReq(req);
   const haveId = boardsRepository.some((item) => item.id === id);
 

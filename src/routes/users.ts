@@ -1,8 +1,10 @@
-const Router = require('./Router/index');
+/* eslint-disable import/no-import-module-exports */
+import { usersRepository } from '../repository/database';
+import { isUuid } from '../utils/isUuid';
+import { Router } from './Router';
+import { responseBuilder } from '../utils/responseBuilder';
+
 const deleteUser = require('../services/users/deleteUser');
-const { usersRepository } = require('../repository/database');
-const isUuid = require('../utils/isUuid');
-const responseBuilder = require('../utils/responseBuilder');
 const getIdFromReq = require('../utils/getPathFromReq');
 const readUser = require('../services/users/readUser');
 const readUsers = require('../services/users/readUsers');
@@ -12,7 +14,7 @@ const updateUser = require('../services/users/updateUser');
 
 const router = new Router();
 
-router.post('users', async (req, res) => {
+router.post('users', async (req: any, res: any) => {
   await bodyParser(req);
   const data = req.body;
   const haveName = Object.prototype.hasOwnProperty.call(data, 'name');
@@ -30,7 +32,7 @@ router.post('users', async (req, res) => {
   }
 });
 
-router.get('users', async (req, res) => {
+router.get('users', async (req: any, res: any) => {
   const id = getIdFromReq(req);
   const haveId = usersRepository.some((item) => item.id === id);
 
@@ -60,7 +62,7 @@ router.get('users', async (req, res) => {
   }
 });
 
-router.put('users', async (req, res) => {
+router.put('users', async (req: any, res: any) => {
   const id = getIdFromReq(req);
 
   await bodyParser(req);
@@ -85,7 +87,7 @@ router.put('users', async (req, res) => {
   }
 });
 
-router.delete('users', async (req, res) => {
+router.delete('users', async (req: any, res: any) => {
   const id = getIdFromReq(req);
   const haveId = usersRepository.some((item) => item.id === id);
 

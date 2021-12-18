@@ -1,4 +1,4 @@
-const responseBuilder = ({
+export const responseBuilder = ({
   res,
   code,
   body = '',
@@ -6,8 +6,8 @@ const responseBuilder = ({
 }: {
   res: any;
   code: number;
-  body: any;
-  message: string;
+  body?: any;
+  message?: string;
 }) => {
   if (body) {
     res.writeHead(code, { 'Content-Type': 'application/json' });
@@ -22,5 +22,3 @@ const responseBuilder = ({
 
   res.end();
 };
-
-module.exports = responseBuilder;

@@ -1,11 +1,22 @@
-const emitter = require('../../utils/eventEmitter');
+/* eslint-disable import/no-import-module-exports */
+const emitter1 = require('../../utils/eventEmitter');
 
-class Router {
+export class Router {
+  endpoints: any;
+
   constructor() {
     this.endpoints = {};
   }
 
-  request({ method = 'GET', path, handler }) {
+  request({
+    method = 'GET',
+    path,
+    handler,
+  }: {
+    method: string;
+    path: string;
+    handler: any;
+  }) {
     if (!this.endpoints[path]) {
       this.endpoints[path] = {};
     }
@@ -14,26 +25,24 @@ class Router {
       throw new Error(`method ${method} on route ${path} is already exist`);
     }
     endpoint[method] = handler;
-    emitter.on(`[${path}]:[${method}]`, (req, res) => {
+    emitter1.on(`[${path}]:[${method}]`, (req: any, res: any) => {
       handler(req, res);
     });
   }
 
-  get(path, handler) {
+  get(path: string, handler: any) {
     this.request({ method: 'GET', path, handler });
   }
 
-  post(path, handler) {
+  post(path: string, handler: any) {
     this.request({ method: 'POST', path, handler });
   }
 
-  put(path, handler) {
+  put(path: string, handler: any) {
     this.request({ method: 'PUT', path, handler });
   }
 
-  delete(path, handler) {
+  delete(path: string, handler: any) {
     this.request({ method: 'DELETE', path, handler });
   }
 }
-
-module.exports = Router;

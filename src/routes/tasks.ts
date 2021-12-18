@@ -1,7 +1,9 @@
-const Router = require('./Router/index');
-const { tasksRepository } = require('../repository/database');
-const isUuid = require('../utils/isUuid');
-const responseBuilder = require('../utils/responseBuilder');
+/* eslint-disable import/no-import-module-exports */
+import { Router } from './Router';
+import { tasksRepository } from '../repository/database';
+import { isUuid } from '../utils/isUuid';
+import { responseBuilder } from '../utils/responseBuilder';
+
 const getIdFromReq = require('../utils/getPathFromReq');
 const createTask = require('../services/tasks/createTask');
 const readTasks = require('../services/tasks/readTasks');
@@ -12,8 +14,8 @@ const deleteTask = require('../services/tasks/deleteTask');
 
 const router = new Router();
 
-const createSubRouter = (boardId) => {
-  router.put(`boards/${boardId}/tasks`, async (req, res) => {
+const createSubRouter = (boardId: string) => {
+  router.put(`boards/${boardId}/tasks`, async (req: any, res: any) => {
     const id = getIdFromReq(req);
 
     await bodyParser(req);
@@ -38,7 +40,7 @@ const createSubRouter = (boardId) => {
     }
   });
 
-  router.delete(`boards/${boardId}/tasks`, async (req, res) => {
+  router.delete(`boards/${boardId}/tasks`, async (req: any, res: any) => {
     const id = getIdFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
 
@@ -62,7 +64,7 @@ const createSubRouter = (boardId) => {
     }
   });
 
-  router.get(`boards/${boardId}/tasks`, async (req, res) => {
+  router.get(`boards/${boardId}/tasks`, async (req: any, res: any) => {
     const id = getIdFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
 
@@ -92,7 +94,7 @@ const createSubRouter = (boardId) => {
     }
   });
 
-  router.post(`boards/${boardId}/tasks`, async (req, res) => {
+  router.post(`boards/${boardId}/tasks`, async (req: any, res: any) => {
     await bodyParser(req);
     const data = req.body;
 
