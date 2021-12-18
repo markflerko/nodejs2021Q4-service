@@ -1,10 +1,9 @@
-const {
-  usersRepository,
-  tasksRepository,
-} = require('../../repository/database');
+/* eslint-disable import/no-import-module-exports */
+import { tasksRepository, usersRepository } from '../../repository/database';
+
 const updateTask = require('../tasks/updateTask');
 
-const deleteUser = (id) => {
+const deleteUser = (id: string) => {
   tasksRepository
     .filter((item) => item.userId === id)
     .forEach((item) => {
@@ -12,7 +11,7 @@ const deleteUser = (id) => {
     });
 
   const index = usersRepository.findIndex((item) => item.id === id);
-  usersRepository.copyWithin(index, index + 1).pop();
+  usersRepository.splice(index, 1);
   return usersRepository.findIndex((item) => item.id === id) === -1;
 };
 

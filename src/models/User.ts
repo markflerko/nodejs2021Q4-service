@@ -1,7 +1,7 @@
-const uuidUser = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
 
-interface IUser {
-  id: string;
+export interface IUser {
+  id?: string;
 
   name: string;
 
@@ -10,8 +10,8 @@ interface IUser {
   password: string;
 }
 
-class User implements IUser {
-  id: string;
+export class User implements IUser {
+  id?: string;
 
   name: string;
 
@@ -19,12 +19,10 @@ class User implements IUser {
 
   password: string;
 
-  constructor({ id = uuidUser(), name, login, password }: IUser) {
+  constructor({ id = uuidv4(), name, login, password }: IUser) {
     this.id = id;
     this.name = name;
     this.login = login;
     this.password = password;
   }
 }
-
-exports.User = User;

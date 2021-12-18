@@ -1,4 +1,5 @@
-const { usersRepository } = require('../../repository/database');
+/* eslint-disable import/no-import-module-exports */
+import { usersRepository } from '../../repository/database';
 
 const readUsers = () =>
   usersRepository.map((item) => ({

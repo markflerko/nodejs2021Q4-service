@@ -1,6 +1,6 @@
-const uuidTask = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
 
-interface ITask {
+export interface ITask {
   id: string;
 
   title: string;
@@ -16,7 +16,7 @@ interface ITask {
   columnId: string | null;
 }
 
-class Task implements ITask {
+export class Task implements ITask {
   id: string;
 
   title: string;
@@ -32,7 +32,7 @@ class Task implements ITask {
   columnId: string | null;
 
   constructor({
-    id = uuidTask(),
+    id = uuidv4(),
     title,
     order,
     description,
@@ -49,5 +49,3 @@ class Task implements ITask {
     this.columnId = columnId;
   }
 }
-
-exports.Task = Task;

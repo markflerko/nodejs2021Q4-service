@@ -1,6 +1,6 @@
-const uuidBoard = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
 
-interface IColumns {
+export interface IColumns {
   id: string;
 
   title: string;
@@ -8,7 +8,7 @@ interface IColumns {
   order: number;
 }
 
-interface IBoard {
+export interface IBoard {
   id: string;
 
   title: string;
@@ -16,18 +16,16 @@ interface IBoard {
   columns: IColumns[];
 }
 
-class Board implements IBoard {
+export class Board implements IBoard {
   id: string;
 
   title: string;
 
   columns: IColumns[];
 
-  constructor({ id = uuidBoard(), title, columns }: IBoard) {
+  constructor({ id = uuidv4(), title, columns }: IBoard) {
     this.id = id;
     this.title = title;
     this.columns = columns;
   }
 }
-
-exports.Board = Board;
