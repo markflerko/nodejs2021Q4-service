@@ -1,10 +1,9 @@
-const {
-  boardsRepository,
-  tasksRepository,
-} = require('../../repository/database');
+/* eslint-disable import/no-import-module-exports */
+import { tasksRepository, boardsRepository } from '../../repository/database';
+
 const deleteTask = require('../tasks/deleteTask');
 
-const deleteBoard = (id) => {
+const deleteBoard = (id: string) => {
   tasksRepository
     .filter((item) => item.boardId === id)
     .forEach((item) => {
