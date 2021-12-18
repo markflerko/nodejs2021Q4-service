@@ -1,4 +1,6 @@
-const bodyParser = (req: any) =>
+import { IncomingMessage } from 'http';
+
+export const bodyParser = (req: IncomingMessage & { body: '' }) =>
   new Promise<void>((res, rej) => {
     let chunks = '';
 
@@ -16,5 +18,3 @@ const bodyParser = (req: any) =>
       res();
     });
   });
-
-module.exports = bodyParser;

@@ -4,11 +4,11 @@ import { boardsRepository } from '../repository/database';
 import { isUuid } from '../utils/isUuid';
 import { responseBuilder } from '../utils/responseBuilder';
 import { getPathFromReq } from '../utils/getPathFromReq';
+import { bodyParser } from '../utils/bodyParser';
 
 const createBoard = require('../services/boards/createBoard');
 const readBoards = require('../services/boards/readBoards');
 const readBoard = require('../services/boards/readBoard');
-const bodyParser = require('../utils/bodyParser');
 const updateBoard = require('../services/boards/updateBoard');
 const deleteBoard = require('../services/boards/deleteBoard');
 const { createSubRouter } = require('./tasks');

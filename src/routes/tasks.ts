@@ -4,11 +4,11 @@ import { tasksRepository } from '../repository/database';
 import { isUuid } from '../utils/isUuid';
 import { responseBuilder } from '../utils/responseBuilder';
 import { getPathFromReq } from '../utils/getPathFromReq';
+import { bodyParser } from '../utils/bodyParser';
 
 const createTask = require('../services/tasks/createTask');
 const readTasks = require('../services/tasks/readTasks');
 const readTask = require('../services/tasks/readTask');
-const bodyParser = require('../utils/bodyParser');
 const updateTask = require('../services/tasks/updateTask');
 const deleteTask = require('../services/tasks/deleteTask');
 

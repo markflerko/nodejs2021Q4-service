@@ -4,12 +4,12 @@ import { isUuid } from '../utils/isUuid';
 import { Router } from './Router';
 import { responseBuilder } from '../utils/responseBuilder';
 import { getPathFromReq } from '../utils/getPathFromReq';
+import { bodyParser } from '../utils/bodyParser';
 
 const deleteUser = require('../services/users/deleteUser');
 const readUser = require('../services/users/readUser');
 const readUsers = require('../services/users/readUsers');
 const createUser = require('../services/users/createUser');
-const bodyParser = require('../utils/bodyParser');
 const updateUser = require('../services/users/updateUser');
 
 const router = new Router();
