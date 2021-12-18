@@ -1,14 +1,12 @@
-/* eslint-disable spaced-comment */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-//@ts-nocheck
 const responseBuilder = require('./utils/responseBuilder');
 const emitter = require('./utils/eventEmitter');
 require('./routes/users');
 require('./routes/boards');
 require('./routes/tasks');
 
-export default async (req, res) => {
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async (req: any, res: any) => {
   try {
     const { method, url } = req;
     const pathFull = url.split('/').slice(1);
