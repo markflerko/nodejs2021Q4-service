@@ -8,7 +8,7 @@ export const responseBuilder = ({
 }: {
   res: ServerResponse;
   code: number;
-  body?: any;
+  body?: string | object;
   message?: string;
 }) => {
   if (body) {

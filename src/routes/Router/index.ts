@@ -1,3 +1,5 @@
+import { IncomingMessage, ServerResponse } from 'http';
+
 /* eslint-disable import/no-import-module-exports */
 const emitter1 = require('../../utils/eventEmitter');
 
@@ -8,15 +10,7 @@ export class Router {
     this.endpoints = {};
   }
 
-  request({
-    method = 'GET',
-    path,
-    handler,
-  }: {
-    method: string;
-    path: string;
-    handler: any;
-  }) {
+  request({ method = 'GET', path, handler }: { method: string; path: string; handler: any }) {
     if (!this.endpoints[path]) {
       this.endpoints[path] = {};
     }
@@ -25,7 +19,7 @@ export class Router {
       throw new Error(`method ${method} on route ${path} is already exist`);
     }
     endpoint[method] = handler;
-    emitter1.on(`[${path}]:[${method}]`, (req: any, res: any) => {
+    emitter1.on(`[${path}]:[${method}]`, (req: IncomingMessage, res: ServerResponse) => {
       handler(req, res);
     });
   }
