@@ -1,8 +1,12 @@
 import { tasksRepository, boardsRepository } from '../../repository/database';
+import deleteTask from '../tasks/deleteTask';
 
-const deleteTask = require('../tasks/deleteTask');
-
-const deleteBoard = (id: string) => {
+/**
+ * Delete board entity from db
+ * @param id indemnificator of entity in db
+ * @returns boolean (true if entity was deleted and false otherwise)
+ */
+const deleteBoard = (id: string): boolean => {
   tasksRepository
     ?.filter((item) => item.boardId === id)
     ?.forEach((item) => {

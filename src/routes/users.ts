@@ -14,7 +14,12 @@ import updateUser from '../services/users/updateUser';
 
 const router = new Router();
 
-router.post('users', async (req: IncomingMessage, res: ServerResponse) => {
+/**
+ * control post request on user route
+ * @param req request object from client
+ * @param res response object that send to client as a result of request handling
+ */
+const postHandler = async (req: IncomingMessage, res: ServerResponse) => {
   const data = await bodyParser<IUser>(req);
 
   const haveName = Object.prototype.hasOwnProperty.call(data, 'name');
@@ -30,9 +35,16 @@ router.post('users', async (req: IncomingMessage, res: ServerResponse) => {
     const person = createUser({ data });
     responseBuilder({ res, code: 201, body: person });
   }
-});
+};
 
-router.get('users', async (req: IncomingMessage, res: ServerResponse) => {
+router.post('users', postHandler);
+
+/**
+ * control get request on user route, and on user route with id as params
+ * @param req request object from client
+ * @param res response object that send to client as a result of request handling
+ */
+const getHandler = async (req: IncomingMessage, res: ServerResponse) => {
   const id = getPathFromReq(req);
   const haveId = usersRepository.some((item) => item.id === id);
 
@@ -60,9 +72,17 @@ router.get('users', async (req: IncomingMessage, res: ServerResponse) => {
       body: user,
     });
   }
-});
+};
 
-router.put('users', async (req: IncomingMessage, res: ServerResponse) => {
+router.get('users', getHandler);
+
+/**
+ * control put request on user route
+ * @param req request object from client
+ * @param res response object that send to client as a result of request handling
+ */
+
+const putHandler = async (req: IncomingMessage, res: ServerResponse) => {
   const id = getPathFromReq(req);
 
   const data = await bodyParser<IUser>(req);
@@ -85,9 +105,16 @@ router.put('users', async (req: IncomingMessage, res: ServerResponse) => {
     const updatedPerson = updateUser({ id, body: data });
     responseBuilder({ res, code: 200, body: updatedPerson });
   }
-});
+};
 
-router.delete('users', async (req: IncomingMessage, res: ServerResponse) => {
+router.put('users', putHandler);
+
+/**
+ * control delete request on user route
+ * @param req request object from client
+ * @param res response object that send to client as a result of request handling
+ */
+const deleteHandler = async (req: IncomingMessage, res: ServerResponse) => {
   const id = getPathFromReq(req);
   const haveId = usersRepository.some((item) => item.id === id);
 
@@ -109,6 +136,8 @@ router.delete('users', async (req: IncomingMessage, res: ServerResponse) => {
       responseBuilder({ res, code: 204 });
     }
   }
-});
+};
+
+router.delete('users', deleteHandler);
 
 export default router;

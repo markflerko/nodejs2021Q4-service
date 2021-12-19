@@ -15,7 +15,12 @@ import deleteTask from '../services/tasks/deleteTask';
 const router = new Router();
 
 export const createSubRouter = (boardId: string) => {
-  router.put(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: ServerResponse) => {
+  /**
+   * control put request on tasks route
+   * @param req request object from client
+   * @param res response object that send to client as a result of request handling
+   */
+  const putHandler = async (req: IncomingMessage, res: ServerResponse) => {
     const id = getPathFromReq(req);
 
     const data = await bodyParser<ITask>(req);
@@ -38,9 +43,14 @@ export const createSubRouter = (boardId: string) => {
       const updatedTask = updateTask({ id, body: data });
       responseBuilder({ res, code: 200, body: updatedTask });
     }
-  });
+  };
 
-  router.delete(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: ServerResponse) => {
+  /**
+   * control delete request on tasks route
+   * @param req request object from client
+   * @param res response object that send to client as a result of request handling
+   */
+  const deleteHandler = async (req: IncomingMessage, res: ServerResponse) => {
     const id = getPathFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
 
@@ -62,9 +72,14 @@ export const createSubRouter = (boardId: string) => {
         responseBuilder({ res, code: 204 });
       }
     }
-  });
+  };
 
-  router.get(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: ServerResponse) => {
+  /**
+   * control get request on tasks route, and on tasks route with id as params
+   * @param req request object from client
+   * @param res response object that send to client as a result of request handling
+   */
+  const getHandler = async (req: IncomingMessage, res: ServerResponse) => {
     const id = getPathFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
 
@@ -92,9 +107,14 @@ export const createSubRouter = (boardId: string) => {
         body: task,
       });
     }
-  });
+  };
 
-  router.post(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: ServerResponse) => {
+  /**
+   * control post request on tasks route
+   * @param req request object from client
+   * @param res response object that send to client as a result of request handling
+   */
+  const postHandler = async (req: IncomingMessage, res: ServerResponse) => {
     const data = await bodyParser<ITask>(req);
 
     const haveTitle = Object.prototype.hasOwnProperty.call(data, 'title');
@@ -112,7 +132,15 @@ export const createSubRouter = (boardId: string) => {
       const task = createTask({ data, boardId });
       responseBuilder({ res, code: 201, body: task });
     }
-  });
+  };
+
+  router.put(`boards/${boardId}/tasks`, putHandler);
+
+  router.delete(`boards/${boardId}/tasks`, deleteHandler);
+
+  router.get(`boards/${boardId}/tasks`, getHandler);
+
+  router.post(`boards/${boardId}/tasks`, postHandler);
 };
 
 export default router;

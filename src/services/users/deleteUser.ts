@@ -1,7 +1,12 @@
 import { tasksRepository, usersRepository } from '../../repository/database';
 import updateTask from '../tasks/updateTask';
 
-const deleteUser = (id: string) => {
+/**
+ * Delete user entity from db
+ * @param id indemnificator of entity in db
+ * @returns boolean (true if entity was deleted and false otherwise)
+ */
+const deleteUser = (id: string): boolean => {
   tasksRepository
     .filter((item) => item.userId === id)
     .forEach((item) => {
