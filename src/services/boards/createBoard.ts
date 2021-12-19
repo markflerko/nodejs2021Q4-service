@@ -1,4 +1,3 @@
-/* eslint-disable import/no-import-module-exports */
 import { v4 as uuidv4 } from 'uuid';
 import { Board, IBoard } from '../../models/Board';
 import { boardsRepository } from '../../repository/database';
@@ -13,4 +12,4 @@ const createBoard = ({ data }: { data: IBoard }) => {
   return board;
 };
 
-module.exports = createBoard;
+export default createBoard;

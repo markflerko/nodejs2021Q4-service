@@ -1,4 +1,3 @@
-/* eslint-disable import/no-import-module-exports */
 import { IncomingMessage, ServerResponse } from 'http';
 import { usersRepository } from '../repository/database';
 import { isUuid } from '../utils/isUuid';
@@ -7,12 +6,11 @@ import { responseBuilder } from '../utils/responseBuilder';
 import { getPathFromReq } from '../utils/getPathFromReq';
 import { bodyParser } from '../utils/bodyParser';
 import { IUser } from '../models/User';
-
-const deleteUser = require('../services/users/deleteUser');
-const readUser = require('../services/users/readUser');
-const readUsers = require('../services/users/readUsers');
-const createUser = require('../services/users/createUser');
-const updateUser = require('../services/users/updateUser');
+import deleteUser from '../services/users/deleteUser';
+import readUser from '../services/users/readUser';
+import readUsers from '../services/users/readUsers';
+import createUser from '../services/users/createUser';
+import updateUser from '../services/users/updateUser';
 
 const router = new Router();
 
@@ -113,4 +111,4 @@ router.delete('users', async (req: IncomingMessage, res: ServerResponse) => {
   }
 });
 
-module.exports = router;
+export default router;

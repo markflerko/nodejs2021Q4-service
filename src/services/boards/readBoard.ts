@@ -6,4 +6,4 @@ const readBoard = (id: string) => {
   return board;
 };
 
-module.exports = readBoard;
+export default readBoard;

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-import-module-exports */
 import { v4 as uuidv4 } from 'uuid';
 import { usersRepository } from '../../repository/database';
 import { IUser, User } from '../../models/User';
@@ -14,4 +13,4 @@ const createUser = ({ data }: { data: IUser }) => {
   };
 };
 
-module.exports = createUser;
+export default createUser;

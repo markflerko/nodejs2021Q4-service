@@ -1,4 +1,3 @@
-/* eslint-disable import/no-import-module-exports */
 import { tasksRepository } from '../../repository/database';
 
 const readBoard = (id: string) => {
@@ -6,4 +5,4 @@ const readBoard = (id: string) => {
   return task;
 };
 
-module.exports = readBoard;
+export default readBoard;

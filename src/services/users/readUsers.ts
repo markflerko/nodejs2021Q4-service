@@ -1,4 +1,3 @@
-/* eslint-disable import/no-import-module-exports */
 import { usersRepository } from '../../repository/database';
 
 const readUsers = () =>
@@ -8,4 +7,4 @@ const readUsers = () =>
     login: item.login,
   }));
 
-module.exports = readUsers;
+export default readUsers;

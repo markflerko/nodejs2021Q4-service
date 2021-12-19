@@ -3,4 +3,4 @@ import { boardsRepository } from '../../repository/database';
 
 const readBoards = () => boardsRepository;
 
-module.exports = readBoards;
+export default readBoards;

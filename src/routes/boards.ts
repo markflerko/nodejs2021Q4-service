@@ -1,4 +1,3 @@
-/* eslint-disable import/no-import-module-exports */
 import { IncomingMessage, ServerResponse } from 'http';
 import { Router } from './Router';
 import { boardsRepository } from '../repository/database';
@@ -7,13 +6,12 @@ import { responseBuilder } from '../utils/responseBuilder';
 import { getPathFromReq } from '../utils/getPathFromReq';
 import { bodyParser } from '../utils/bodyParser';
 import { IBoard } from '../models/Board';
-
-const createBoard = require('../services/boards/createBoard');
-const readBoards = require('../services/boards/readBoards');
-const readBoard = require('../services/boards/readBoard');
-const updateBoard = require('../services/boards/updateBoard');
-const deleteBoard = require('../services/boards/deleteBoard');
-const { createSubRouter } = require('./tasks');
+import createBoard from '../services/boards/createBoard';
+import readBoards from '../services/boards/readBoards';
+import readBoard from '../services/boards/readBoard';
+import updateBoard from '../services/boards/updateBoard';
+import deleteBoard from '../services/boards/deleteBoard';
+import { createSubRouter } from './tasks';
 
 const router = new Router();
 
@@ -113,4 +111,4 @@ router.delete('boards', async (req: IncomingMessage, res: ServerResponse) => {
   }
 });
 
-module.exports = router;
+export default router;

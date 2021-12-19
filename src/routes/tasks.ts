@@ -1,4 +1,3 @@
-/* eslint-disable import/no-import-module-exports */
 import { IncomingMessage, ServerResponse } from 'http';
 import { Router } from './Router';
 import { tasksRepository } from '../repository/database';
@@ -7,16 +6,15 @@ import { responseBuilder } from '../utils/responseBuilder';
 import { getPathFromReq } from '../utils/getPathFromReq';
 import { bodyParser } from '../utils/bodyParser';
 import { ITask } from '../models/Task';
-
-const createTask = require('../services/tasks/createTask');
-const readTasks = require('../services/tasks/readTasks');
-const readTask = require('../services/tasks/readTask');
-const updateTask = require('../services/tasks/updateTask');
-const deleteTask = require('../services/tasks/deleteTask');
+import createTask from '../services/tasks/createTask';
+import readTasks from '../services/tasks/readTasks';
+import readTask from '../services/tasks/readTask';
+import updateTask from '../services/tasks/updateTask';
+import deleteTask from '../services/tasks/deleteTask';
 
 const router = new Router();
 
-const createSubRouter = (boardId: string) => {
+export const createSubRouter = (boardId: string) => {
   router.put(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: ServerResponse) => {
     const id = getPathFromReq(req);
 
@@ -48,7 +46,7 @@ const createSubRouter = (boardId: string) => {
 
     if (!isUuid(id)) {
       responseBuilder({
-        res, 
+        res,
         code: 400,
         message: `Sorry but id: ${id} doesnt match uuid format \n`,
       });
@@ -117,5 +115,4 @@ const createSubRouter = (boardId: string) => {
   });
 };
 
-exports.createSubRouter = createSubRouter;
-exports.tasksRouter = router;
+export default router;

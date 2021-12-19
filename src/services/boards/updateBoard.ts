@@ -11,4 +11,4 @@ const updateBoard = ({ id, body }: { id: string; body: IBoard }) => {
   return boardsRepository[index];
 };
 
-module.exports = updateBoard;
+export default updateBoard;

@@ -1,7 +1,5 @@
-/* eslint-disable import/no-import-module-exports */
 import { tasksRepository, usersRepository } from '../../repository/database';
-
-const updateTask = require('../tasks/updateTask');
+import updateTask from '../tasks/updateTask';
 
 const deleteUser = (id: string) => {
   tasksRepository
@@ -15,4 +13,4 @@ const deleteUser = (id: string) => {
   return usersRepository.findIndex((item) => item.id === id) === -1;
 };
 
-module.exports = deleteUser;
+export default deleteUser;
