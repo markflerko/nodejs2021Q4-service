@@ -1,10 +1,12 @@
 /* eslint-disable import/no-import-module-exports */
+import { IncomingMessage } from 'http';
 import { usersRepository } from '../repository/database';
 import { isUuid } from '../utils/isUuid';
 import { Router } from './Router';
 import { responseBuilder } from '../utils/responseBuilder';
 import { getPathFromReq } from '../utils/getPathFromReq';
 import { bodyParser } from '../utils/bodyParser';
+import { IUser } from '../models/User';
 
 const deleteUser = require('../services/users/deleteUser');
 const readUser = require('../services/users/readUser');
@@ -14,9 +16,9 @@ const updateUser = require('../services/users/updateUser');
 
 const router = new Router();
 
-router.post('users', async (req: any, res: any) => {
-  await bodyParser(req);
-  const data = req.body;
+router.post('users', async (req: IncomingMessage, res: any) => {
+  const data = await bodyParser<IUser>(req);
+
   const haveName = Object.prototype.hasOwnProperty.call(data, 'name');
   const haveLogin = Object.prototype.hasOwnProperty.call(data, 'login');
   const havePass = Object.prototype.hasOwnProperty.call(data, 'password');
@@ -32,7 +34,7 @@ router.post('users', async (req: any, res: any) => {
   }
 });
 
-router.get('users', async (req: any, res: any) => {
+router.get('users', async (req: IncomingMessage, res: any) => {
   const id = getPathFromReq(req);
   const haveId = usersRepository.some((item) => item.id === id);
 
@@ -62,11 +64,11 @@ router.get('users', async (req: any, res: any) => {
   }
 });
 
-router.put('users', async (req: any, res: any) => {
+router.put('users', async (req: IncomingMessage, res: any) => {
   const id = getPathFromReq(req);
 
-  await bodyParser(req);
-  const data = req.body;
+  const data = await bodyParser<IUser>(req);
+
   const haveId = usersRepository.some((item) => item.id === id);
 
   if (!isUuid(id)) {
@@ -87,7 +89,7 @@ router.put('users', async (req: any, res: any) => {
   }
 });
 
-router.delete('users', async (req: any, res: any) => {
+router.delete('users', async (req: IncomingMessage, res: any) => {
   const id = getPathFromReq(req);
   const haveId = usersRepository.some((item) => item.id === id);
 

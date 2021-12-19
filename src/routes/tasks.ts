@@ -1,10 +1,12 @@
 /* eslint-disable import/no-import-module-exports */
+import { IncomingMessage } from 'http';
 import { Router } from './Router';
 import { tasksRepository } from '../repository/database';
 import { isUuid } from '../utils/isUuid';
 import { responseBuilder } from '../utils/responseBuilder';
 import { getPathFromReq } from '../utils/getPathFromReq';
 import { bodyParser } from '../utils/bodyParser';
+import { ITask } from '../models/Task';
 
 const createTask = require('../services/tasks/createTask');
 const readTasks = require('../services/tasks/readTasks');
@@ -15,11 +17,11 @@ const deleteTask = require('../services/tasks/deleteTask');
 const router = new Router();
 
 const createSubRouter = (boardId: string) => {
-  router.put(`boards/${boardId}/tasks`, async (req: any, res: any) => {
+  router.put(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: any) => {
     const id = getPathFromReq(req);
 
-    await bodyParser(req);
-    const data = req.body;
+    const data = await bodyParser<ITask>(req);
+
     const haveId = tasksRepository.some((item) => item.id === id);
 
     if (!isUuid(id)) {
@@ -40,7 +42,7 @@ const createSubRouter = (boardId: string) => {
     }
   });
 
-  router.delete(`boards/${boardId}/tasks`, async (req: any, res: any) => {
+  router.delete(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: any) => {
     const id = getPathFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
 
@@ -64,7 +66,7 @@ const createSubRouter = (boardId: string) => {
     }
   });
 
-  router.get(`boards/${boardId}/tasks`, async (req: any, res: any) => {
+  router.get(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: any) => {
     const id = getPathFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
 
@@ -94,25 +96,15 @@ const createSubRouter = (boardId: string) => {
     }
   });
 
-  router.post(`boards/${boardId}/tasks`, async (req: any, res: any) => {
-    await bodyParser(req);
-    const data = req.body;
+  router.post(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: any) => {
+    const data = await bodyParser<ITask>(req);
 
     const haveTitle = Object.prototype.hasOwnProperty.call(data, 'title');
     const haveOrder = Object.prototype.hasOwnProperty.call(data, 'order');
-    const haveDescription = Object.prototype.hasOwnProperty.call(
-      data,
-      'description'
-    );
+    const haveDescription = Object.prototype.hasOwnProperty.call(data, 'description');
     const haveUserId = Object.prototype.hasOwnProperty.call(data, 'userId');
     const haveBoardId = Object.prototype.hasOwnProperty.call(data, 'boardId');
-    if (
-      !haveTitle ||
-      !haveOrder ||
-      !haveDescription ||
-      !haveUserId ||
-      !haveBoardId
-    ) {
+    if (!haveTitle || !haveOrder || !haveDescription || !haveUserId || !haveBoardId) {
       responseBuilder({
         res,
         code: 400,
