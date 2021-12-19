@@ -1,5 +1,5 @@
 /* eslint-disable import/no-import-module-exports */
-import { IncomingMessage } from 'http';
+import { IncomingMessage, ServerResponse } from 'http';
 import { usersRepository } from '../repository/database';
 import { isUuid } from '../utils/isUuid';
 import { Router } from './Router';
@@ -16,7 +16,7 @@ const updateUser = require('../services/users/updateUser');
 
 const router = new Router();
 
-router.post('users', async (req: IncomingMessage, res: any) => {
+router.post('users', async (req: IncomingMessage, res: ServerResponse) => {
   const data = await bodyParser<IUser>(req);
 
   const haveName = Object.prototype.hasOwnProperty.call(data, 'name');
@@ -34,7 +34,7 @@ router.post('users', async (req: IncomingMessage, res: any) => {
   }
 });
 
-router.get('users', async (req: IncomingMessage, res: any) => {
+router.get('users', async (req: IncomingMessage, res: ServerResponse) => {
   const id = getPathFromReq(req);
   const haveId = usersRepository.some((item) => item.id === id);
 
@@ -64,7 +64,7 @@ router.get('users', async (req: IncomingMessage, res: any) => {
   }
 });
 
-router.put('users', async (req: IncomingMessage, res: any) => {
+router.put('users', async (req: IncomingMessage, res: ServerResponse) => {
   const id = getPathFromReq(req);
 
   const data = await bodyParser<IUser>(req);
@@ -89,7 +89,7 @@ router.put('users', async (req: IncomingMessage, res: any) => {
   }
 });
 
-router.delete('users', async (req: IncomingMessage, res: any) => {
+router.delete('users', async (req: IncomingMessage, res: ServerResponse) => {
   const id = getPathFromReq(req);
   const haveId = usersRepository.some((item) => item.id === id);
 

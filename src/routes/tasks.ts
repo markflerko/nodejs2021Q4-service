@@ -1,5 +1,5 @@
 /* eslint-disable import/no-import-module-exports */
-import { IncomingMessage } from 'http';
+import { IncomingMessage, ServerResponse } from 'http';
 import { Router } from './Router';
 import { tasksRepository } from '../repository/database';
 import { isUuid } from '../utils/isUuid';
@@ -17,7 +17,7 @@ const deleteTask = require('../services/tasks/deleteTask');
 const router = new Router();
 
 const createSubRouter = (boardId: string) => {
-  router.put(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: any) => {
+  router.put(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: ServerResponse) => {
     const id = getPathFromReq(req);
 
     const data = await bodyParser<ITask>(req);
@@ -42,7 +42,7 @@ const createSubRouter = (boardId: string) => {
     }
   });
 
-  router.delete(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: any) => {
+  router.delete(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: ServerResponse) => {
     const id = getPathFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
 
@@ -66,7 +66,7 @@ const createSubRouter = (boardId: string) => {
     }
   });
 
-  router.get(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: any) => {
+  router.get(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: ServerResponse) => {
     const id = getPathFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
 
@@ -96,7 +96,7 @@ const createSubRouter = (boardId: string) => {
     }
   });
 
-  router.post(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: any) => {
+  router.post(`boards/${boardId}/tasks`, async (req: IncomingMessage, res: ServerResponse) => {
     const data = await bodyParser<ITask>(req);
 
     const haveTitle = Object.prototype.hasOwnProperty.call(data, 'title');
