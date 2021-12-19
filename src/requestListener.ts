@@ -1,10 +1,11 @@
 import { IncomingMessage, ServerResponse } from 'http';
 
-const responseBuilder = require('./utils/responseBuilder');
+import responseBuilder from './utils/responseBuilder';
+import './routes/users';
+import './routes/boards';
+import './routes/tasks';
+
 const emitter = require('./utils/eventEmitter');
-require('./routes/users');
-require('./routes/boards');
-require('./routes/tasks');
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
   try {
@@ -20,8 +21,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
           message: 'Sorry here only one layer nest\n',
         });
       } else {
-        const route =
-          pathIdPath === 'tasks' ? `${path}/${pathId}/${pathIdPath}` : path;
+        const route = pathIdPath === 'tasks' ? `${path}/${pathId}/${pathIdPath}` : path;
         const emitted = emitter.emit(`[${route}]:[${method}]`, req, res);
         if (!emitted) {
           responseBuilder({

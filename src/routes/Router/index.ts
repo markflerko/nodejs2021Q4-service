@@ -1,7 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http';
 
-/* eslint-disable import/no-import-module-exports */
-const emitter1 = require('../../utils/eventEmitter');
+const emitter = require('../../utils/eventEmitter');
 
 interface IHandler {
   (req: IncomingMessage, res: ServerResponse): void;
@@ -26,7 +25,7 @@ export class Router {
     }
 
     endpoint[method] = handler;
-    emitter1.on(`[${path}]:[${method}]`, (req: IncomingMessage, res: ServerResponse) => {
+    emitter.on(`[${path}]:[${method}]`, (req: IncomingMessage, res: ServerResponse) => {
       handler(req, res);
     });
   }

@@ -24,3 +24,5 @@ export const responseBuilder = ({
 
   res.end();
 };
+
+export default responseBuilder;
