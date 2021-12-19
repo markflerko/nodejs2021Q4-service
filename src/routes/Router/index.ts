@@ -1,6 +1,6 @@
 import { IncomingMessage, ServerResponse } from 'http';
 
-const emitter = require('../../utils/eventEmitter');
+import emitter from '../../utils/eventEmitter';
 
 interface IHandler {
   (req: IncomingMessage, res: ServerResponse): void;

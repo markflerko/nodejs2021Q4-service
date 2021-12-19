@@ -5,7 +5,7 @@ import './routes/users';
 import './routes/boards';
 import './routes/tasks';
 
-const emitter = require('./utils/eventEmitter');
+import emitter from './utils/eventEmitter';
 
 export default async (req: IncomingMessage, res: ServerResponse) => {
   try {
