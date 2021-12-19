@@ -3,7 +3,7 @@ import { Router } from './Router';
 import { boardsRepository } from '../repository/database';
 import { isUuid } from '../utils/isUuid';
 import { responseBuilder } from '../utils/responseBuilder';
-import { getPathFromReq } from '../utils/getPathFromReq';
+import { getIdFromReq } from '../utils/getPathFromReq';
 import { bodyParser } from '../utils/bodyParser';
 import { IBoard } from '../models/Board';
 import createBoard from '../services/boards/createBoard';
@@ -17,8 +17,8 @@ const router = new Router();
 
 /**
  * control post request on boards route
- * @param req request object from client
- * @param res response object that send to client as a result of request handling
+ * @param req request stream from client
+ * @param res response stream that send to client as a result of request handling
  */
 const postHandler = async (req: IncomingMessage, res: ServerResponse) => {
   const data = await bodyParser<IBoard>(req);
@@ -41,11 +41,11 @@ router.post('boards', postHandler);
 
 /**
  * control get request on boards route, and on boards route with id as params
- * @param req request object from client
- * @param res response object that send to client as a result of request handling
+ * @param req request stream from client
+ * @param res response stream that send to client as a result of request handling
  */
 const getHandler = async (req: IncomingMessage, res: ServerResponse) => {
-  const id = getPathFromReq(req);
+  const id = getIdFromReq(req);
   const haveId = boardsRepository.some((item) => item.id === id);
 
   if (!id) {
@@ -78,11 +78,11 @@ router.get('boards', getHandler);
 
 /**
  * control put request on boards route
- * @param req request object from client
- * @param res response object that send to client as a result of request handling
+ * @param req request stream from client
+ * @param res response stream that send to client as a result of request handling
  */
 const putHandler = async (req: IncomingMessage, res: ServerResponse) => {
-  const id = getPathFromReq(req);
+  const id = getIdFromReq(req);
 
   const data = await bodyParser<IBoard>(req);
 
@@ -110,11 +110,11 @@ router.put('boards', putHandler);
 
 /**
  * control delete request on boards route
- * @param req request object from client
- * @param res response object that send to client as a result of request handling
+ * @param req request stream from client
+ * @param res response stream that send to client as a result of request handling
  */
 const deleteHandler = async (req: IncomingMessage, res: ServerResponse) => {
-  const id = getPathFromReq(req);
+  const id = getIdFromReq(req);
   const haveId = boardsRepository.some((item) => item.id === id);
 
   if (!isUuid(id)) {

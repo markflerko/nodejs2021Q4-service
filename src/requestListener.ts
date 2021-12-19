@@ -7,6 +7,11 @@ import './routes/tasks';
 
 import emitter from './utils/eventEmitter';
 
+/**
+ * requestListener function that will invoke on every request on server and defy it behavior
+ * @param req request stream from client
+ * @param res response stream that send to client as a result of request handling
+ */
 export default async (req: IncomingMessage, res: ServerResponse) => {
   try {
     const { method, url } = req;

@@ -1,6 +1,11 @@
 import { IncomingMessage } from 'http';
 
-export const getPathFromReq = (req: IncomingMessage) => {
+/**
+ * Parse request in order to get id from path
+ * @param req request stream from client
+ * @returns id from path
+ */
+export const getIdFromReq = (req: IncomingMessage) => {
   let id1;
   let pathIdPath;
   let id2;

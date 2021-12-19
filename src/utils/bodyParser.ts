@@ -1,12 +1,17 @@
 import { IncomingMessage } from 'http';
 
+/**
+ * Parse request in order to get it body as js object and return it
+ * @param req request stream from client
+ * @returns parsed body as js object if fulfilled or throw error if rejected
+ */
 export const bodyParser = <T>(req: IncomingMessage) =>
   new Promise<T>((res, rej) => {
     let chunks = '';
 
     req.on('error', (err: Error) => {
       console.error('error happened while body parsing', err);
-      rej();
+      rej(err);
     });
 
     req.on('data', (chunk: string) => {

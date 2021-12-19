@@ -3,7 +3,7 @@ import { Router } from './Router';
 import { tasksRepository } from '../repository/database';
 import { isUuid } from '../utils/isUuid';
 import { responseBuilder } from '../utils/responseBuilder';
-import { getPathFromReq } from '../utils/getPathFromReq';
+import { getIdFromReq } from '../utils/getPathFromReq';
 import { bodyParser } from '../utils/bodyParser';
 import { ITask } from '../models/Task';
 import createTask from '../services/tasks/createTask';
@@ -17,11 +17,11 @@ const router = new Router();
 export const createSubRouter = (boardId: string) => {
   /**
    * control put request on tasks route
-   * @param req request object from client
-   * @param res response object that send to client as a result of request handling
+   * @param req request stream from client
+   * @param res response stream that send to client as a result of request handling
    */
   const putHandler = async (req: IncomingMessage, res: ServerResponse) => {
-    const id = getPathFromReq(req);
+    const id = getIdFromReq(req);
 
     const data = await bodyParser<ITask>(req);
 
@@ -47,11 +47,11 @@ export const createSubRouter = (boardId: string) => {
 
   /**
    * control delete request on tasks route
-   * @param req request object from client
-   * @param res response object that send to client as a result of request handling
+   * @param req request stream from client
+   * @param res response stream that send to client as a result of request handling
    */
   const deleteHandler = async (req: IncomingMessage, res: ServerResponse) => {
-    const id = getPathFromReq(req);
+    const id = getIdFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
 
     if (!isUuid(id)) {
@@ -76,11 +76,11 @@ export const createSubRouter = (boardId: string) => {
 
   /**
    * control get request on tasks route, and on tasks route with id as params
-   * @param req request object from client
-   * @param res response object that send to client as a result of request handling
+   * @param req request stream from client
+   * @param res response stream that send to client as a result of request handling
    */
   const getHandler = async (req: IncomingMessage, res: ServerResponse) => {
-    const id = getPathFromReq(req);
+    const id = getIdFromReq(req);
     const haveId = tasksRepository.some((item) => item.id === id);
 
     if (!id) {
@@ -111,8 +111,8 @@ export const createSubRouter = (boardId: string) => {
 
   /**
    * control post request on tasks route
-   * @param req request object from client
-   * @param res response object that send to client as a result of request handling
+   * @param req request stream from client
+   * @param res response stream that send to client as a result of request handling
    */
   const postHandler = async (req: IncomingMessage, res: ServerResponse) => {
     const data = await bodyParser<ITask>(req);
