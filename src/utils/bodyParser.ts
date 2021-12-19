@@ -1,7 +1,7 @@
 import { IncomingMessage } from 'http';
 
-export const bodyParser = (req: IncomingMessage & { body: '' }) =>
-  new Promise<void>((res, rej) => {
+export const bodyParser = <T>(req: IncomingMessage) =>
+  new Promise<T>((res, rej) => {
     let chunks = '';
 
     req.on('error', (err: Error) => {
@@ -14,7 +14,6 @@ export const bodyParser = (req: IncomingMessage & { body: '' }) =>
     });
 
     req.on('end', () => {
-      req.body = JSON.parse(chunks);
-      res();
+      res(JSON.parse(chunks));
     });
   });

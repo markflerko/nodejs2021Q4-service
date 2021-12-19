@@ -5,6 +5,7 @@ import { isUuid } from '../utils/isUuid';
 import { responseBuilder } from '../utils/responseBuilder';
 import { getPathFromReq } from '../utils/getPathFromReq';
 import { bodyParser } from '../utils/bodyParser';
+import { IBoard } from '../models/Board';
 
 const createBoard = require('../services/boards/createBoard');
 const readBoards = require('../services/boards/readBoards');
@@ -16,8 +17,7 @@ const { createSubRouter } = require('./tasks');
 const router = new Router();
 
 router.post('boards', async (req: any, res: any) => {
-  await bodyParser(req);
-  const data = req.body;
+  const data = await bodyParser<IBoard>(req);
   const haveTitle = Object.prototype.hasOwnProperty.call(data, 'title');
   const haveColumns = Object.prototype.hasOwnProperty.call(data, 'columns');
   if (!haveTitle || !haveColumns) {
