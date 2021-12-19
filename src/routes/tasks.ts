@@ -48,7 +48,7 @@ const createSubRouter = (boardId: string) => {
 
     if (!isUuid(id)) {
       responseBuilder({
-        res,
+        res, 
         code: 400,
         message: `Sorry but id: ${id} doesnt match uuid format \n`,
       });
