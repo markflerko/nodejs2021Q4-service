@@ -7,3 +7,25 @@
 {"level":"verbose","message":" url: /boards, body: [object Object], params: %2Fboards=, method: POST, statusCode: 201, [4ms]","timestamp":"2021-12-26 20:13:44"}
 {"level":"verbose","message":" App is running on http://localhost:4000","timestamp":"2021-12-26 20:14:51"}
 {"level":"info","message":"    App is running on http://localhost:4000","timestamp":"2021-12-26 20:14:58"}
+{"level":"info","message":"    App is running on http://localhost:4000","timestamp":"2021-12-26 20:22:05"}
+{"level":"verbose","message":" url: /boards, body: [object Object], params: %2Fboards=, method: POST, statusCode: 201, [2ms]","timestamp":"2021-12-26 20:22:06"}
+{"level":"verbose","message":" url: /boards, body: [object Object], params: %2Fboards=, method: POST, statusCode: 201, [1ms]","timestamp":"2021-12-26 20:22:07"}
+{"level":"verbose","message":" url: /boards/65c4064b-47ea-4570-8422-fadea2b09505/tasks, body: [object Object], params: %2Fboards%2F65c4064b-47ea-4570-8422-fadea2b09505%2Ftasks=, method: POST, statusCode: 201, [1ms]","timestamp":"2021-12-26 20:22:10"}
+{"level":"info","message":"    App is running on http://localhost:4000","timestamp":"2021-12-26 20:22:34"}
+{"level":"info","message":"    App is running on http://localhost:4000","timestamp":"2021-12-26 20:30:24"}
+{"level":"info","message":"    App is running on http://localhost:4000","timestamp":"2021-12-26 20:30:42"}
+{"level":"info","message":"    App is running on http://localhost:4000","timestamp":"2021-12-26 20:31:51"}
+{"level":"info","message":"    App is running on http://localhost:4000","timestamp":"2021-12-26 20:31:57"}
+{"level":"verbose","message":" url: /boards, body: [object Object], params: %2Fboards=, method: POST, statusCode: 201, [3ms]","timestamp":"2021-12-26 20:32:02"}
+{"level":"verbose","message":" url: /boards, body: [object Object], params: %2Fboards=, method: POST, statusCode: 201, [1ms]","timestamp":"2021-12-26 20:32:03"}
+{"level":"verbose","message":" url: /boards/38d4c3b5-4c45-4e26-a06d-2040c2c65d27/tasks, body: [object Object], params: %2Fboards%2F38d4c3b5-4c45-4e26-a06d-2040c2c65d27%2Ftasks=, method: POST, statusCode: 201, [1ms]","timestamp":"2021-12-26 20:32:05"}
+{"level":"verbose","message":" url: /boards/38d4c3b5-4c45-4e26-a06d-2040c2c65d27/tasks/d1b50e39-0f48-4fc7-89a1-6b8ae24ab2b9, body: [object Object], params: %2Fboards%2F38d4c3b5-4c45-4e26-a06d-2040c2c65d27%2Ftasks%2Fd1b50e39-0f48-4fc7-89a1-6b8ae24ab2b9=, method: PUT, statusCode: 200, [1ms]","timestamp":"2021-12-26 20:32:09"}
+{"level":"info","message":"    App is running on http://localhost:4000","timestamp":"2021-12-26 20:32:18"}
+{"level":"verbose","message":" url: /boards, body: [object Object], params: %2Fboards=, method: POST, statusCode: 201, [3ms]","timestamp":"2021-12-26 20:32:21"}
+{"level":"verbose","message":" url: /boards/acbb239b-3c09-4e8d-8b52-57669d7d86bf/tasks, body: [object Object], params: %2Fboards%2Facbb239b-3c09-4e8d-8b52-57669d7d86bf%2Ftasks=, method: POST, statusCode: 201, [1ms]","timestamp":"2021-12-26 20:32:23"}
+{"level":"error","message":"   captured error: gfdsfdsf","timestamp":"2021-12-26 20:32:25"}
+{"level":"verbose","message":" url: /boards/acbb239b-3c09-4e8d-8b52-57669d7d86bf/tasks/1c044c47-76cc-4283-93ea-be9816de32c0, body: [object Object], params: %2Fboards%2Facbb239b-3c09-4e8d-8b52-57669d7d86bf%2Ftasks%2F1c044c47-76cc-4283-93ea-be9816de32c0=, method: PUT, statusCode: 200, [6238ms]","timestamp":"2021-12-26 20:32:31"}
+{"level":"info","message":"    App is running on http://localhost:4000","timestamp":"2021-12-26 20:32:37"}
+{"level":"verbose","message":" url: /boards, body: [object Object], params: %2Fboards=, method: POST, statusCode: 201, [5ms]","timestamp":"2021-12-26 20:32:38"}
+{"level":"verbose","message":" url: /boards/82e018f0-9cb3-4ea2-acf5-e9a9232ed81a/tasks, body: [object Object], params: %2Fboards%2F82e018f0-9cb3-4ea2-acf5-e9a9232ed81a%2Ftasks=, method: POST, statusCode: 201, [1ms]","timestamp":"2021-12-26 20:32:39"}
+{"level":"error","message":"   captured error: gfdsfdsf","timestamp":"2021-12-26 20:32:44"}
