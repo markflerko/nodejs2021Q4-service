@@ -1,9 +1,5 @@
 import { createLogger, format, transports } from 'winston';
 
-// const logFormat = format.printf(({ level, message, timestamp, stack }) => {
-//   return `${timestamp} ${level}: ${stack || message}`;
-// });
-
 export const logger = createLogger({
   level: 'verbose',
   format: format.combine(

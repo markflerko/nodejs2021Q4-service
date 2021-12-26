@@ -1,6 +1,7 @@
 /* eslint-disable no-unreachable */
 import { IncomingMessage, ServerResponse } from 'http';
 import { finished } from 'stream';
+import queryString from 'query-string';
 
 import responseBuilder from './utils/responseBuilder';
 import './routes/users';
@@ -9,8 +10,6 @@ import './routes/tasks';
 
 import emitter from './utils/eventEmitter';
 import { logger } from './logger';
-// import { bodyParser } from './utils/bodyParser';
-// import { IBoard } from './models/Board';
 
 /**
  * requestListener function that will invoke on every request on server and defy it behavior
@@ -22,9 +21,7 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
     const start = Date.now();
     const { method, url } = req;
 
-    // const body = await bodyParser<IBoard>(req);
-    const body = {};
-    const params = new URLSearchParams(url);
+    const parsed = queryString.parseUrl(`http://localhost:4000${url}`);
 
     if (url) {
       const pathFull = url.split('/').slice(1);
@@ -54,7 +51,10 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
       const ms = Date.now() - start;
       const { statusCode } = res;
       logger.verbose(
-        `url: ${url}, body: ${body}, params: ${params}, method: ${method}, statusCode: ${statusCode}, [${ms}ms]`
+        // @ts-ignore
+        `url: ${url}, body: ${req.body}, params: ${JSON.stringify(
+          parsed.query
+        )}, method: ${method}, statusCode: ${statusCode}, [${ms}ms]`
       );
     });
   } catch (error) {

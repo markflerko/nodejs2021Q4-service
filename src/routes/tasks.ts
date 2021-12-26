@@ -1,4 +1,3 @@
-/* eslint-disable no-unreachable */
 import { IncomingMessage, ServerResponse } from 'http';
 import { Router } from './Router';
 import { tasksRepository } from '../repository/database';
@@ -27,8 +26,6 @@ export const createSubRouter = (boardId: string) => {
     const data = await bodyParser<ITask>(req);
 
     const haveId = tasksRepository.some((item) => item.id === id);
-
-    throw new Error('gfdsfdsf');
 
     if (!isUuid(id)) {
       responseBuilder({

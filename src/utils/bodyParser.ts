@@ -20,6 +20,8 @@ export const bodyParser = <T>(req: IncomingMessage) =>
     });
 
     req.on('end', () => {
+      // @ts-ignore
+      req.body = chunks;
       res(JSON.parse(chunks));
     });
   });
