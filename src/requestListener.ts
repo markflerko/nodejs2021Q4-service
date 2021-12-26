@@ -1,4 +1,6 @@
+/* eslint-disable no-unreachable */
 import { IncomingMessage, ServerResponse } from 'http';
+import { finished } from 'stream';
 
 import responseBuilder from './utils/responseBuilder';
 import './routes/users';
@@ -7,7 +9,6 @@ import './routes/tasks';
 
 import emitter from './utils/eventEmitter';
 import { logger } from './logger';
-import { finished } from 'stream';
 // import { bodyParser } from './utils/bodyParser';
 // import { IBoard } from './models/Board';
 
@@ -52,12 +53,12 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
       // npm package on-finished
       const ms = Date.now() - start;
       const { statusCode } = res;
-      logger.info(
+      logger.verbose(
         `url: ${url}, body: ${body}, params: ${params}, method: ${method}, statusCode: ${statusCode}, [${ms}ms]`
       );
     });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     responseBuilder({
       res,
       code: 500,
