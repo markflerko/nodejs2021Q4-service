@@ -6,6 +6,10 @@ import './routes/boards';
 import './routes/tasks';
 
 import emitter from './utils/eventEmitter';
+import { logger } from './logger';
+import { finished } from 'stream';
+// import { bodyParser } from './utils/bodyParser';
+// import { IBoard } from './models/Board';
 
 /**
  * requestListener function that will invoke on every request on server and defy it behavior
@@ -14,7 +18,13 @@ import emitter from './utils/eventEmitter';
  */
 export default async (req: IncomingMessage, res: ServerResponse) => {
   try {
+    const start = Date.now();
     const { method, url } = req;
+
+    // const body = await bodyParser<IBoard>(req);
+    const body = {};
+    const params = new URLSearchParams(url);
+
     if (url) {
       const pathFull = url.split('/').slice(1);
       const [path, pathId, pathIdPath] = pathFull;
@@ -37,6 +47,15 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
         }
       }
     }
+
+    finished(res, () => {
+      // npm package on-finished
+      const ms = Date.now() - start;
+      const { statusCode } = res;
+      logger.info(
+        `url: ${url}, body: ${body}, params: ${params}, method: ${method}, statusCode: ${statusCode}, [${ms}ms]`
+      );
+    });
   } catch (error) {
     console.log(error);
     responseBuilder({
