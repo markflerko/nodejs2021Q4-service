@@ -1,4 +1,7 @@
+/* eslint-disable no-unreachable */
 import { IncomingMessage, ServerResponse } from 'http';
+import { finished } from 'stream';
+import queryString from 'query-string';
 
 import responseBuilder from './utils/responseBuilder';
 import './routes/users';
@@ -6,6 +9,7 @@ import './routes/boards';
 import './routes/tasks';
 
 import emitter from './utils/eventEmitter';
+import { logger } from './logger';
 
 /**
  * requestListener function that will invoke on every request on server and defy it behavior
@@ -14,7 +18,11 @@ import emitter from './utils/eventEmitter';
  */
 export default async (req: IncomingMessage, res: ServerResponse) => {
   try {
+    const start = Date.now();
     const { method, url } = req;
+
+    const parsed = queryString.parseUrl(`http://localhost:4000${url}`);
+
     if (url) {
       const pathFull = url.split('/').slice(1);
       const [path, pathId, pathIdPath] = pathFull;
@@ -37,8 +45,20 @@ export default async (req: IncomingMessage, res: ServerResponse) => {
         }
       }
     }
+
+    finished(res, () => {
+      // npm package on-finished
+      const ms = Date.now() - start;
+      const { statusCode } = res;
+      logger.verbose(
+        // @ts-ignore
+        `url: ${url}, body: ${req.body}, params: ${JSON.stringify(
+          parsed.query
+        )}, method: ${method}, statusCode: ${statusCode}, [${ms}ms]`
+      );
+    });
   } catch (error) {
-    console.log(error);
+    logger.error(error);
     responseBuilder({
       res,
       code: 500,

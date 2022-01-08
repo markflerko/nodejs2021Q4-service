@@ -46,11 +46,12 @@
   "dependencies": {
     "@microsoft/tsdoc": "^0.13.2",
     "@types/uuid": "^8.3.3",
+    "@types/winston": "^2.4.4",
     "cross-env": "7.0.3",
     "dotenv": "10.0.0",
-    "express": "4.17.1",
-    "swagger-ui-express": "4.1.6",
+    "query-string": "^7.0.1",
     "uuid": "8.3.2",
+    "winston": "^3.3.3",
     "yamljs": "0.3.0"
   },
   "devDependencies": {

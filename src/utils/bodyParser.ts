@@ -1,4 +1,5 @@
 import { IncomingMessage } from 'http';
+import { logger } from '../logger/index';
 
 /**
  * Parse request in order to get it body as js object and return it
@@ -10,7 +11,7 @@ export const bodyParser = <T>(req: IncomingMessage) =>
     let chunks = '';
 
     req.on('error', (err: Error) => {
-      console.error('error happened while body parsing', err);
+      logger.error('error happened while body parsing', err);
       rej(err);
     });
 
@@ -19,6 +20,8 @@ export const bodyParser = <T>(req: IncomingMessage) =>
     });
 
     req.on('end', () => {
+      // @ts-ignore
+      req.body = chunks;
       res(JSON.parse(chunks));
     });
   });
