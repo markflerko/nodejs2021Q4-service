@@ -1,4 +1,5 @@
 import { createLogger, format, transports } from 'winston';
+import path from 'path';
 
 export const logger = createLogger({
   level: 'verbose',
@@ -12,12 +13,12 @@ export const logger = createLogger({
   transports: [
     new transports.Console(),
     new transports.File({
-      filename: 'access.log',
+      filename: path.join('logs', 'access.log'),
       level: 'verbose',
       format: format.combine(format.uncolorize(), format.json()),
     }),
     new transports.File({
-      filename: 'error.log',
+      filename: path.join('logs', 'error.log'),
       level: 'error',
       format: format.combine(format.uncolorize(), format.json()),
     }),
