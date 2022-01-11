@@ -1,15 +1,11 @@
-FROM node:16.13.0
+FROM node:16-alpine3.14
 
 WORKDIR /app
 
-COPY package.json /app
+COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm ci --only-prod
 
 COPY . .
-
-EXPOSE 4000
-
-VOLUME [/app/src/database, /app/logs]
 
 CMD ["npm", "run", "start"]
