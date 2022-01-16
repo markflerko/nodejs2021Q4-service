@@ -1,5 +1,8 @@
 {
   "compilerOptions": {
+    "paths": {
+      "*": ["*", "generated/*"]
+    },
     "target": "es6",
     "module": "CommonJS",
     "rootDir": "./src",
@@ -19,7 +22,8 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "strictPropertyInitialization": true,
-    "useUnknownInCatchVariables": true
+    "useUnknownInCatchVariables": true,
+    "resolveJsonModule": true
   },
   "include": ["./src/**/*.ts"]
 }
