@@ -1,4 +1,4 @@
-# RS School REST service
+# RS School REST service1
 
 ## Docker
 
